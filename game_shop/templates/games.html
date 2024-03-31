@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    HERE THEY ARE: <a href="/add-game"><button>+ Game</button></a>
+    <div class="wrapper-games">
+        {% for game in games %}
+            <div class="game">
+                <a href="/game/{{ game._id }}">
+                    <img src="/static/covers/{{ game.cover_img }}" alt="cover">
+                    <div class="details">
+                        <div class="title">{{ game.title }}</div>
+                        <div class="description">{{ game.desc }}</div>
+                        <div class="pricing">{{ game.qty }} --- {{ game.price }}</div>
+                        <div class="game-reviews-count">
+                            Reviews: {{ game.reviews|count }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% if response %}
+            <p error>{{ response }}</p>
+        {% endif %}
+    </div>
+{% endblock content %}

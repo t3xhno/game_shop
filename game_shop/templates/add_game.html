@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <form action="/add-game" method="POST" enctype="multipart/form-data">
+        <div class="form-element">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+        </div>
+        <div class="form-element">
+            <label for="desc">Description:</label>
+            <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+        </div>
+        <div class="form-element">
+            <label for="qty">Quantity:</label>
+            <input type="text" name="qty" id="qty">
+        </div>
+        <div class="form-element">
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price">
+        </div>
+        <div class="form-element">
+            <label for="cover_img">Cover:</label>
+            <input type="file" accept="image/*" id="cover_img" name="cover_img">
+        </div>
+
+        <button type="submit">Add Game</button>
+
+        {% if response %}
+            <p error>{{ response }}</p>
+        {% endif %}
+    </form>
+{% endblock content %}

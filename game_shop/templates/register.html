@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="wrapper-edit">
+        <form action="/register" method="POST" enctype="multipart/form-data">
+            <div class="form-element">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-element">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-element">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="form-element">
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role">
+            </div>
+            <div class="form-element">
+                <label for="avatar_img">Avatar:</label>
+                <input type="file" id="avatar_img" name="avatar_img" accept="image/*">
+            </div>
+            <button type="submit">Register</button>
+
+            {% if response %}
+                <p error>{{ response }}</p>
+            {% endif %}
+        </form>
+    </div>
+{% endblock content %}

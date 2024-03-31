@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="wrapper">
+        {% for user in users %}
+            <div class="user-wrapper">
+                <a href="/users/{{ user._id }}">
+                    <div class="user">
+                        {% if user.avatar_img != "" %}
+                            <img src="/static/avatars/{{ user.avatar_img }}" alt="avatar" class="user-avatar">
+                        {% else %}
+                            <img src="/static/avatars/default_avatar.png" alt="avatar" class="user-avatar">
+                        {% endif %}
+                        <div class="user-info">
+                            <div class="name">{{ user.username }}</div>
+                            <div class="details">{{ user.email }} | {{ user.role }}</div>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="owned-games">
+                    <div class="games-header">
+                        <h2>TOP GAMES</h2>
+                    </div>
+                    <div class="the-games">
+                        {% for game in user.my_games %}
+                        <a href="/game/{{ game._id }}">
+                            <div class="featured-game">
+                                <img src="/static/covers/{{ game.cover_img }}" alt="cover" class="game-cover">
+                                <div class="game-details">
+                                    <p>{{ game.title }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if response %}
+            <p error>{{ response }}</p>
+        {% endif %}
+    </div>
+{% endblock content %}

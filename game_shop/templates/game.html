@@ -1,0 +1,120 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="single-game-wrapper">
+        <div class="single-game-title">
+            <img src="/static/covers/{{ game.cover_img }}" alt="cover">
+            <h2>{{ game.title }}</h2>
+        </div>
+        <div class="single-game-details">
+            <div class="single-game-description">
+                <p>{{ game.desc }}</p>
+            </div>
+            <hr>
+            <div class="single-game-reviews">
+                {% for review in game.reviews %}
+                    <div class="single-game-review">
+                        <a href="/users/{{ review.user._id }}">
+                            <div class="review-poster">
+                                {% if review.user.avatar_img != "" %}
+                                    <img src="/static/avatars/{{ review.user.avatar_img }}" alt="avatar">
+                                {% else %}
+                                    <img src="/static/avatars/default_avatar.png" alt="avatar">
+                                {% endif %}
+                                {{ review.user.username }}
+                            </div>
+                        </a>
+                        <div class="review-details">
+                            <div class="single-game-rating">Rating: {{ review.rating }}</div>
+                            <div class="single-game-review-text">{{ review.review_text }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="single-game-qty-price">
+            <div class="single-game-qty">
+                {% if game.qty > 0 %}
+                    IN STOCK: {{ game.qty }}
+                {% else %}
+                    OUT OF STOCK!
+                {% endif %}
+            </div>
+            <div class="single-game-price">
+                ${{ game.price }}
+            </div>
+            {% if isOwned == False %}
+                <button id="buy-button">BUY GAME</button>
+            {% else %}
+                <div class="game-owned">
+                    <p>GAME ALREADY OWNED, leave a review!</p>
+                    <form autocomplete="off">
+                        <div class="form-element">
+                            <label for="rating">Rating:</label>
+                            <input type="range" min="1" max="5" value="5" id="rating" name="rating">
+                            <p id="selected-rating">5</p>
+                        </div>
+                        <div class="form-element">
+                            <label for="review-text">Review:</label>
+                            <textarea name="review-text" id="review-text" cols="30" rows="10"></textarea>
+                        </div>
+                        <button id="add-review">Add review</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+
+        <p class="info" id="info"></p>
+
+        {% if response %}
+            <p error>{{ response }}</p>
+        {% endif %}
+    </div>
+
+    <script defer>
+        const buyBtn = document.getElementById("buy-button");
+        let isBuying = false;
+        buyBtn && buyBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (isBuying) return;
+            isBuying = true;
+            fetch("http://localhost:5000/buy-game", {
+                method: "POST",
+                body: JSON.stringify({
+                    game_id: JSON.parse("{{ game._id | tojson }}"),
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+            }).then(response => response.json()).then(json => {
+                console.log(json);
+                isBuying = false;
+                if (json.code === 200) location.reload();
+            });
+        })
+
+        const ratingSelector = document.getElementById("rating");
+        const ratingPreview = document.getElementById("selected-rating");
+        ratingPreview.innerText = ratingSelector.value;
+        ratingSelector.addEventListener("input", (e) => ratingPreview.innerText = e.target.value);
+
+        const addReviewBtn = document.getElementById("add-review");
+        const ratingText = document.getElementById("review-text");
+        const info = document.getElementById("info");
+        addReviewBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            fetch("http://localhost:5000/add-review/{{ game._id }}", {
+                method: "POST",
+                body: JSON.stringify({
+                    rating: ratingSelector.value,
+                    review_text: ratingText.value,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+            }).then(response => response.json()).then(json => {
+                info.innerText = json.msg;
+                if (json.code === 200) location.reload();
+            });
+        })
+    </script>
+{% endblock content %}

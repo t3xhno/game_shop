@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="wrapper-edit">
+        <form action="/users/{{ user._id }}" method="POST" enctype="multipart/form-data">
+            <div class="form-element">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}">
+            </div>
+            <div class="form-element">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" value="{{ user.email }}">
+            </div>
+            <div class="form-element">
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" value="{{ user.role }}">
+            </div>
+            <button type="submit">Update</button>
+
+            {% if response %}
+                <p error>{{ response }}</p>
+            {% endif %}
+        </form>
+    </div>
+{% endblock content %}

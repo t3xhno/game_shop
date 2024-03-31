@@ -1,0 +1,225 @@
+*,
+*.after,
+*.before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.wrapper {
+    gap: 1rem;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.user-wrapper {
+    gap: 2rem;
+    display: flex;
+    background: #999;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 15rem;
+}
+
+.user {
+    gap: 1rem;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.owned-games {
+    gap: 2rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.the-games {
+    flex: 1;
+    gap: 2rem;
+    display: flex;
+}
+
+.featured-game {
+    gap: 1rem;
+    flex: 1;
+    display: flex;
+    border: 2px solid black;
+    width: 12rem;
+}
+
+img.game-cover {
+    width: 4rem;
+    height: 4rem;
+}
+
+.game-details {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.user img.user-avatar {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+}
+
+.user .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex: 1;
+    height: 100%;
+}
+
+.wrapper-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+form {
+    width: 350px;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.form-element {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+[error] {
+    color: red;
+}
+
+.game img {
+    width: 5rem;
+    height: 5rem;
+}
+
+.wrapper-games {
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.game {
+    width: 100%;
+}
+
+.game a {
+    background: #999;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.single-game-wrapper {
+    gap: 2rem;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.single-game-title {
+    gap: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.single-game-title img {
+    width: 20rem;
+    height: 20rem;
+}
+
+.single-game-details {
+    gap: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 10rem;
+}
+
+.single-game-details > * {
+    width: 100%;
+}
+
+.single-game-reviews {
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.single-game-review {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.review-poster {
+    gap: 0.2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.review-poster img {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+}
+
+.single-game-qty-price {
+    gap: 2rem;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.single-game-qty-price .single-game-qty,
+.single-game-qty-price, .single-game-price {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
